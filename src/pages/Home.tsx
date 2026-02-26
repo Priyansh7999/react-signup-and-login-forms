@@ -1,8 +1,14 @@
 import Navbar from "../components/Navbar";
+import { useUser } from "../context/UserContext";
 
 const Home = () => {
+    const context = useUser();
+    const username = context?.userData?.name;
+
     return (
-        <Navbar />
+        <>
+            <Navbar username={username} />
+        </>
     )
 }
 
