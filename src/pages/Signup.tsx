@@ -1,12 +1,12 @@
 import { Form, Formik } from "formik";
 import Button from "../components/Button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import InputField from "../components/InputField";
-import { useState } from "react";
 import type { SignupValuesProps } from "../types/signup";
 import { validateSignup } from "../utils/validateFields";
+import { useUser } from "../context/UserContext";
 
-const initialValues : SignupValuesProps= {
+const initialValues: SignupValuesProps = {
     name: "",
     email: "",
     password: "",
@@ -14,9 +14,12 @@ const initialValues : SignupValuesProps= {
 }
 
 const Signup = () => {
-    const [userData, setUserData] = useState<SignupValuesProps | null>(null);
+    const context = useUser();
+    const navigate = useNavigate();
+
     const handleSubmit = (values: SignupValuesProps) => {
-        setUserData(values);
+        context?.setUserData(values);
+        navigate("/login");
         console.log(values);
     }
 
