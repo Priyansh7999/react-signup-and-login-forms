@@ -5,6 +5,7 @@ import type { TicketType } from "../types/ticket";
 import { validateTicket } from "../utils/validateTicket";
 import axios from "axios";
 import { createTicket } from "../services/ticket.service";
+import toast from "react-hot-toast";
 
 const initialValues: TicketType = {
     title: "",
@@ -16,11 +17,11 @@ const CreateTicket = () => {
         try {
             const data = await createTicket(values)
             if (data.success) {
-                alert(data.message);
+                toast.success(data.message);
             }
         } catch (error) {
             if (axios.isAxiosError(error)) {
-                alert(error.response?.data?.message || "Something went wrong. Try again");
+                toast.error(error.response?.data?.message || "Something went wrong. Try again");
             }
         }
     }
@@ -32,8 +33,6 @@ const CreateTicket = () => {
                 <Formik
                     initialValues={initialValues}
                     validate={validateTicket}
-                    validateOnBlur={false}
-                    validateOnChange={false}
                     onSubmit={handleSubmit}
                 >
                     {() => (

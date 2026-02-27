@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useState } from "react";
 import type { SignupPropsType } from "../types/signup";
 
 type UserContextType = {
@@ -16,8 +16,4 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
             {children}
         </UserContext.Provider>
     )
-}
-
-export const useUser = () => {
-    return useContext(UserContext);
 }

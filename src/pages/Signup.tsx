@@ -6,6 +6,7 @@ import type { SignupPropsType } from "../types/signup";
 import { validateSignup } from "../utils/validateFields";
 import axios from "axios";
 import { userSignup } from "../services/auth.service";
+import toast from "react-hot-toast";
 
 const initialValues: SignupPropsType = {
     name: "",
@@ -21,12 +22,12 @@ const Signup = () => {
         try {
             const data = await userSignup(values);
             if (data.success) {
-                alert(data.message);
+                toast.success(data.message);
                 navigate("/login");
             }
         } catch (error) {
             if (axios.isAxiosError(error)) {
-                alert(error.response?.data?.message || "Something went wrong. Try again");
+                toast.error(error.response?.data?.message || "Something went wrong. Try again");
             }
         }
     }
@@ -42,8 +43,6 @@ const Signup = () => {
                 <Formik
                     initialValues={initialValues}
                     validate={validateSignup}
-                    validateOnBlur={false}
-                    validateOnChange={false}
                     onSubmit={handleSubmit}
                 >
                     {() => (
