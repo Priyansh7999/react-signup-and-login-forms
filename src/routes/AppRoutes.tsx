@@ -7,31 +7,22 @@ import ProtectedRoute from "./ProtectedRoute";
 import CreateTicket from "../pages/CreateTicket";
 import ViewTicket from "../pages/ViewTicket";
 import Tickets from "../pages/Tickets";
+import Layout from "../components/Layout";
 
 const AppRoutes = () => {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={
+                <Route element={
                     <ProtectedRoute>
-                        <Home />
+                        <Layout />
                     </ProtectedRoute>
-                } />
-                <Route path="/tickets/create" element={
-                    <ProtectedRoute>
-                        <CreateTicket />
-                    </ProtectedRoute>
-                } />
-                <Route path="/tickets" element={
-                    <ProtectedRoute>
-                        <Tickets />
-                    </ProtectedRoute>
-                } />
-                <Route path="/tickets/:id" element={
-                    <ProtectedRoute>
-                        <ViewTicket />
-                    </ProtectedRoute>
-                } />
+                }>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/tickets" element={<Tickets />} />
+                    <Route path="/tickets/create" element={<CreateTicket />} />
+                    <Route path="/tickets/:id" element={<ViewTicket />} />
+                </Route>
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="*" element={<NotFound />} />
