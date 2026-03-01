@@ -79,6 +79,18 @@ const Tickets = () => {
                                             >
                                                 Update
                                             </Link>
+
+                                            {isAllowed("REASSIGN_TICKET") &&
+                                                <>
+                                                    <span className="text-neutral-300">|</span>
+                                                    <Link
+                                                        to={`/tickets/${ticket?.id}/assign`}
+                                                        className="text-sky-800 hover:text-sky-500"
+                                                    >
+                                                        Assign
+                                                    </Link>
+                                                </>
+                                            }
                                         </>
                                     }
                                 </td>

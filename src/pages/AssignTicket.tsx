@@ -4,6 +4,11 @@ import { useEffect, useState } from "react";
 import type { SupportAgentType, User } from "../types/user";
 import { getAllSupportAgents } from "../api/user.api";
 import SelectField from "../components/SelectField";
+import { assignTicket } from "../api/ticket.api";
+import { useNavigate, useParams } from "react-router-dom";
+import toast from "react-hot-toast";
+import useUser from "../hooks/useUser";
+import axios from "axios";
 
 type AssignTicketType = {
     assignedToUserId: string;
@@ -14,12 +19,17 @@ const initialValues: AssignTicketType = {
 }
 
 const AssignTicket = () => {
+    const { id } = useParams();
+    const { user } = useUser();
+    const navigate = useNavigate();
     const [supportAgents, setSupportAgents] = useState<SupportAgentType[]>([]);
 
     useEffect(() => {
         const fetchAllSupportAgents = async () => {
             const data = await getAllSupportAgents();
-            const agents = data.data.map((agent: User) => ({
+            const agents = data.data
+            .filter((agent: User) => agent.id !== user?.id)
+            .map((agent: User) => ({
                 id: agent.id,
                 name: agent.name,
             }));
@@ -27,11 +37,22 @@ const AssignTicket = () => {
         };
 
         fetchAllSupportAgents();
-    }, []);
+    }, [user?.id]);
 
-    const handleSubmit = () => {
-
+    const handleSubmit = async (values: AssignTicketType) => {
+        try {
+            const data = await assignTicket(id, user?.id, values?.assignedToUserId);
+            if (data.success) {
+                toast.success(data.message);
+                navigate("/tickets");
+            }
+        } catch (error) {
+            if (axios.isAxiosError(error)) {
+                toast.error(error.response?.data?.message);
+            }
+        }
     }
+
     return (
         <section className="w-full flex items-center justify-center mt-20 p-4">
             <div className="w-full p-8 max-w-md bg-white rounded-2xl border border-neutral-200 space-y-6">
