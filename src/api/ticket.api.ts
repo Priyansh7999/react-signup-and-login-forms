@@ -44,3 +44,17 @@ export const getTicketById = async (id: string | undefined) => {
     });
     return response.data;    
 }
+
+export const getCommentsByTicketId = async (id: string | undefined) => {
+    const token = getAuthToken();
+    if (!token) {
+        return null;
+    }
+
+    const response = await axios.get(`${baseURI}/${id}/comments`, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        }
+    });
+    return response.data; 
+}
