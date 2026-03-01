@@ -8,6 +8,14 @@ const Navbar = () => {
             <ul className="flex items-center gap-6">
                 <li>
                     <Link
+                        to="/"
+                        className="text-lg font-medium hover:text-sky-800 transition duration-300 ease-in-out"
+                    >
+                        Home
+                    </Link>
+                </li>
+                <li>
+                    <Link
                         to="/tickets/create"
                         className="text-lg font-medium hover:text-sky-800 transition duration-300 ease-in-out"
                     >
