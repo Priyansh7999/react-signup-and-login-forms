@@ -3,6 +3,7 @@ import type { TicketType } from "../types/ticket";
 import { getTicketById } from "../api/ticket.api";
 import { useParams } from "react-router-dom";
 import Comments from "../components/Comments";
+import AddComment from "../components/AddComment";
 
 const ViewTicket = () => {
     const { id } = useParams();
@@ -27,6 +28,7 @@ const ViewTicket = () => {
                 <h2><span className="font-semibold">Created On: </span>{ticket?.createdAt ? new Date(ticket.createdAt).toLocaleDateString() : "-"}</h2>
 
                 <Comments id={id} />
+                <AddComment id={id} />
             </div>
         </div>
     )
