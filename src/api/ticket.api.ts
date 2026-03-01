@@ -42,7 +42,7 @@ export const getTicketById = async (id: string | undefined) => {
             Authorization: `Bearer ${token}`,
         }
     });
-    return response.data;    
+    return response.data;
 }
 
 export const getCommentsByTicketId = async (id: string | undefined) => {
@@ -56,7 +56,7 @@ export const getCommentsByTicketId = async (id: string | undefined) => {
             Authorization: `Bearer ${token}`,
         }
     });
-    return response.data; 
+    return response.data;
 }
 
 export const updateTicket = async (id: string | undefined, values: UpdateTicketType) => {
@@ -78,6 +78,20 @@ export const updateTicket = async (id: string | undefined, values: UpdateTicketT
     if (Object.keys(payload).length === 0) return;
 
     const response = await axios.patch(`${baseURI}/${id}`, payload, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        }
+    });
+    return response.data;
+}
+
+export const addComment = async (id: string | undefined, body: string) => {
+    const token = getAuthToken();
+    if (!token) {
+        return null;
+    }
+
+    const response = await axios.post(`${baseURI}/${id}/comments`, { body }, {
         headers: {
             Authorization: `Bearer ${token}`,
         }
