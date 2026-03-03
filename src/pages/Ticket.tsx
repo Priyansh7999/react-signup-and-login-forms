@@ -23,12 +23,12 @@ export default function Ticket() {
 
     fetchTicket();
   }, [id]);
-  useEffect(() => {
-    const fetchComment = async () => {
+
+  const fetchComment = async () => {
       const data = await getCommentsByTicketId(id);
       setComments(data.data);
-    };
-
+  };
+  useEffect(() => {
     fetchComment();
   }, [id]);
 
@@ -36,6 +36,7 @@ export default function Ticket() {
     try {
       const data = await addComment(id, values.body);
       if (data.success) {
+        fetchComment()
         toast.success(data.message);
       }
     } catch (error) {
