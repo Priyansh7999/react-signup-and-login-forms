@@ -2,32 +2,21 @@ import { Form, Formik } from "formik";
 import InputField from "./InputField";
 import Button from "./Button";
 import { validateComment } from "../utils/validateTicket";
-import axios from "axios";
-import toast from "react-hot-toast";
-import { addComment } from "../api/ticket.api";
-
-const AddComment = ({ id }: { id: string | undefined }) => {
-    const handleSubmit = async (values: { body: string }) => {
-        try {
-            const data = await addComment(id, values.body);
-            if (data.success) {
-                toast.success(data.message);
-            }
-        } catch (error) {
-            if (axios.isAxiosError(error)) {
-                toast.error(error.response?.data?.message);
-            }
-        }
-    }
+import type React from "react";
+type Props ={
+    handleAddComment: (values:{body:string})=>Promise<void>
+}
+const AddComment = ({ handleAddComment }:Props) : React.JSX.Element => {
+    const initialValues = { body: "" }
 
     return (
         <div className="border-t border-neutral-200 pt-4 space-y-4">
             <h1 className="font-semibold">Add Comment</h1>
 
             <Formik
-                initialValues={{ body: "" }}
+                initialValues={initialValues}
                 validate={validateComment}
-                onSubmit={handleSubmit}
+                onSubmit={handleAddComment}
             >
                 {() => (
                     <Form className="flex flex-col gap-4">
