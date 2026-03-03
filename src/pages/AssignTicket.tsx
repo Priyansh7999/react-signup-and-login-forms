@@ -18,28 +18,28 @@ const initialValues: AssignTicketType = {
     assignedToUserId: "",
 }
 
-const AssignTicket = () : React.JSX.Element=> {
+const AssignTicket = (): React.JSX.Element => {
     const { id } = useParams();
     const { user } = useUser();
     const navigate = useNavigate();
     const [supportAgents, setSupportAgents] = useState<SupportAgentType[]>([]);
 
     useEffect(() => {
-        const fetchAllSupportAgents = async () : Promise<void> => {
+        const fetchAllSupportAgents = async (): Promise<void> => {
             const data = await getAllSupportAgents();
             const agents = data.data
-            .filter((agent: User) => agent.id !== user?.id)
-            .map((agent: User) => ({
-                id: agent.id,
-                name: agent.name,
-            }));
+                .filter((agent: User) => agent.id !== user?.id)
+                .map((agent: User) => ({
+                    id: agent.id,
+                    name: agent.name,
+                }));
             setSupportAgents(agents);
         };
 
         fetchAllSupportAgents();
     }, [user?.id]);
 
-    const handleSubmit = async (values: AssignTicketType) : Promise<void> => {
+    const handleSubmit = async (values: AssignTicketType): Promise<void> => {
         try {
             const data = await assignTicket(id, user?.id, values?.assignedToUserId);
             if (data.success) {
@@ -68,6 +68,8 @@ const AssignTicket = () : React.JSX.Element=> {
                                 label="Select Support Agent"
                                 name="assignedToUserId"
                                 options={supportAgents}
+                                getOptionLabel={(agent) => agent.name}
+                                getOptionValue={(agent) => agent.id}
                             />
 
                             <div className="mt-2">

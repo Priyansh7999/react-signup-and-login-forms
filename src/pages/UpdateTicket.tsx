@@ -85,14 +85,17 @@ const UpdateTicket = () => {
                                     label="Status"
                                     name="status"
                                     options={["IN_PROGRESS", "CLOSED"]}
+                                    getOptionLabel={(status) => status}
+                                    getOptionValue={(status) => status}
                                 />
                             )}
-
                             {isAllowed("UPDATE_TICKET_PRIORITY") && (
                                 <SelectField
                                     label="Priority"
                                     name="priority"
                                     options={["LOW", "MEDIUM", "HIGH"]}
+                                    getOptionLabel={(priority) => priority}
+                                    getOptionValue={(priority) => priority}
                                 />
                             )}
 
