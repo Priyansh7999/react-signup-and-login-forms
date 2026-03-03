@@ -7,6 +7,7 @@ import { validateSignup } from "../utils/validateFields";
 import axios from "axios";
 import { userSignup } from "../api/auth.api";
 import toast from "react-hot-toast";
+import type React from "react";
 
 const initialValues: SignupPropsType = {
     name: "",
@@ -15,7 +16,7 @@ const initialValues: SignupPropsType = {
     confirmPassword: "",
 }
 
-const Signup = () => {
+const Signup = () : React.JSX.Element => {
     const navigate = useNavigate();
 
     const handleSubmit = async (values: SignupPropsType) => {

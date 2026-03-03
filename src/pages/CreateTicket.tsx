@@ -18,7 +18,7 @@ const initialValues: TicketType = {
 const CreateTicket = () => {
     const navigate = useNavigate();
     const isAllowed = useIsAllowed();
-    const handleSubmit = async (values: TicketType) => {
+    const handleSubmit = async (values: TicketType) : Promise<void> => {
         try {
             const data = await createTicket(values)
             if (data.success) {

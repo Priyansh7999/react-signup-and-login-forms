@@ -1,9 +1,10 @@
+import type React from "react";
 import type { CommentType } from "../types/comment";
 
 type Props ={
     commentsList : CommentType[]
 }
-const Comments = ({commentsList}:Props) => {
+const Comments = ({commentsList}:Props) : React.JSX.Element => {
 
     return (
         <div className="border-t border-neutral-200 p-4 space-y-4">

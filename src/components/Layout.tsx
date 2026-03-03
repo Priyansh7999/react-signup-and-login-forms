@@ -1,7 +1,8 @@
 import { Outlet } from "react-router-dom";
 import Navbar from "./Navbar";
+import type React from "react";
 
-const Layout = () => {
+const Layout = () : React.JSX.Element => {
     return (
         <>
             <Navbar />

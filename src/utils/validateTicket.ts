@@ -23,7 +23,7 @@ export const validateTicket = (values: TicketType) => {
     return errors;
 }
 
-export const validateComment = (values: { body: string }) => {
+export const validateComment = (values: { body: string }) : { body?: string | undefined; } => {
     const errors: { body?: string } = {};
 
     if (!values.body.trim()) {

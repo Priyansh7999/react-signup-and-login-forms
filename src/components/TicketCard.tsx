@@ -1,11 +1,12 @@
 import type { TicketType } from "../types/ticket";
 import useIsAllowed from "../hooks/useIsAllowed";
+import type React from "react";
 
 type Props={
     ticketDetails:TicketType | null
 }
 
-const TicketCard = ({ticketDetails}:Props) => {
+const TicketCard = ({ticketDetails}:Props) : React.JSX.Element => {
     const isAllowed = useIsAllowed();
 
     return (

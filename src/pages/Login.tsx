@@ -9,17 +9,18 @@ import { setAuthToken } from "../utils/authToken";
 import { userLogin } from "../api/auth.api";
 import toast from "react-hot-toast";
 import useUser from "../hooks/useUser";
+import type React from "react";
 
 const initialValues: LoginPropsType = {
     email: "",
     password: "",
 }
 
-const Login = () => {
+const Login = () : React.JSX.Element=> {
     const { fetchCurrentUser } = useUser();
     const navigate = useNavigate();
 
-    const handleSubmit = async (values: LoginPropsType) => {
+    const handleSubmit = async (values: LoginPropsType) : Promise<void> => {
         try {
             const data = await userLogin(values);
             if (data.success) {

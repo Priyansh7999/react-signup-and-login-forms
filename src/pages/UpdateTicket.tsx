@@ -20,7 +20,7 @@ const UpdateTicket = () => {
     const { id } = useParams();
     const navigate = useNavigate();
     const isAllowed = useIsAllowed();
-    const handleSubmit = async (values: UpdateTicketType) => {
+    const handleSubmit = async (values: UpdateTicketType) :  Promise<void> => {
         try {
             const data = await updateTicket(id, values);
             if (data.success) {

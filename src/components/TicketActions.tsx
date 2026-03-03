@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom";
 import useIsAllowed from "../hooks/useIsAllowed";
+import type React from "react";
 
 type TicketActionsPropsType = {
     ticketId: string | undefined;
     status: string | undefined;
 }
 
-const TicketActions = ({ ticketId, status }: TicketActionsPropsType) => {
+const TicketActions = ({ ticketId, status }: TicketActionsPropsType) : React.JSX.Element => {
     const isAllowed = useIsAllowed();
 
     return (

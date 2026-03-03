@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import useIsAllowed from "../hooks/useIsAllowed";
+import type React from "react";
 
-const Navbar = () => {
+const Navbar = () : React.JSX.Element=> {
     const isAllowed = useIsAllowed();
 
     return (

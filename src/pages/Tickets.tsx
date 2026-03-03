@@ -9,7 +9,7 @@ const Tickets = () => {
     const isAllowed = useIsAllowed();
 
     useEffect(() => {
-        const fetchTickets = async () => {
+        const fetchTickets = async () : Promise<void> => {
             const data = await getAllTickets();
             setTickets(data.data);
         };

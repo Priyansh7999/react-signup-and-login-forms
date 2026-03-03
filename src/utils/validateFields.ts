@@ -5,7 +5,7 @@ const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 const passwordRegex = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!]).*$/;
 const nameRegex = /^(?!.*\d)[a-zA-Z\s]{2,50}$/;
 
-export const validateSignup = (values: SignupPropsType) => {
+export const validateSignup = (values: SignupPropsType) :  Partial<SignupPropsType>=> {
     const { name, email, password, confirmPassword } = values;
     const errors: Partial<SignupPropsType> = {};
 
@@ -40,7 +40,7 @@ export const validateSignup = (values: SignupPropsType) => {
     return errors;
 }
 
-export const validateLogin = (values: LoginPropsType) => {
+export const validateLogin = (values: LoginPropsType) : Partial<LoginPropsType> => {
     const { email, password } = values;
     const errors: Partial<LoginPropsType> = {};
 

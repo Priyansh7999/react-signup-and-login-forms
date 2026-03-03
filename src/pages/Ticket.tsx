@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { addComment, getCommentsByTicketId, getTicketById } from '../api/ticket.api';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import type { TicketType } from '../types/ticket';
 import TicketCard from '../components/TicketCard';
 import toast from 'react-hot-toast';
@@ -9,26 +9,22 @@ import AddComment from '../components/AddComment';
 import type { CommentType } from '../types/comment';
 import Comments from '../components/Comments';
 
-export default function Ticket() {
+export default function Ticket() : React.JSX.Element {
   const { id } = useParams();
   const [ticket, setTicket] = useState<TicketType | null>(null);
   const [comments, setComments] = useState<CommentType[]>([]);
 
 
-  useEffect(() => {
-    const fetchTicket = async () => {
+  const fetchTicket = async () : Promise<void> => {
       const data = await getTicketById(id);
       setTicket(data.data);
-    };
-
-    fetchTicket();
-  }, [id]);
-
-  const fetchComment = async () => {
+  };
+  const fetchComment = async () : Promise<void> => {
       const data = await getCommentsByTicketId(id);
       setComments(data.data);
   };
   useEffect(() => {
+    fetchTicket();
     fetchComment();
   }, [id]);
 
