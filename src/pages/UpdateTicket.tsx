@@ -4,23 +4,21 @@ import Button from "../components/Button";
 import useIsAllowed from "../hooks/useIsAllowed";
 import CheckboxField from "../components/CheckboxField";
 import type { UpdateTicketType } from "../types/ticket";
-import { updateTicket } from "../api/ticket.api";
+import { getTicketById, updateTicket } from "../api/ticket.api";
 import { useNavigate, useParams } from "react-router-dom";
 import toast from "react-hot-toast";
 import axios from "axios";
 import SelectField from "../components/SelectField";
-
-const initialValues: UpdateTicketType = {
-    description: "",
-    status: "",
-    priority: "",
-}
+import { useEffect, useState } from "react";
 
 const UpdateTicket = () => {
+
+
     const { id } = useParams();
     const navigate = useNavigate();
     const isAllowed = useIsAllowed();
-    const handleSubmit = async (values: UpdateTicketType) :  Promise<void> => {
+    const [description, setDescription] = useState<string>("");
+    const handleSubmit = async (values: UpdateTicketType): Promise<void> => {
         try {
             const data = await updateTicket(id, values);
             if (data.success) {
@@ -33,6 +31,25 @@ const UpdateTicket = () => {
             }
         }
     }
+    const getData = async () => {
+        try {
+            const data = await getTicketById(id);
+            setDescription(data?.data?.description)
+            console.log(data?.data?.description)
+        } catch (error) {
+            if (axios.isAxiosError(error)) {
+                toast.error(error.response?.data?.message);
+            }
+        }
+    }
+    const initialValues: UpdateTicketType = {
+        description: description,
+        status: "",
+        priority: "",
+    }
+    useEffect(() => {
+        getData();
+    }, [id])
 
     return (
         <section className="w-full flex items-center justify-center mt-20 p-4">
@@ -42,6 +59,7 @@ const UpdateTicket = () => {
                 <Formik
                     initialValues={initialValues}
                     onSubmit={handleSubmit}
+                    enableReinitialize
                 >
                     {() => (
                         <Form className="flex flex-col gap-4">
@@ -64,17 +82,17 @@ const UpdateTicket = () => {
 
                             {isAllowed("UPDATE_TICKET_STATUS") && (
                                 <SelectField
-                                    label="Status" 
-                                    name="status" 
-                                    options={["IN_PROGRESS", "CLOSED"]} 
+                                    label="Status"
+                                    name="status"
+                                    options={["IN_PROGRESS", "CLOSED"]}
                                 />
                             )}
 
                             {isAllowed("UPDATE_TICKET_PRIORITY") && (
                                 <SelectField
-                                    label="Priority" 
-                                    name="priority" 
-                                    options={["LOW", "MEDIUM", "HIGH"]} 
+                                    label="Priority"
+                                    name="priority"
+                                    options={["LOW", "MEDIUM", "HIGH"]}
                                 />
                             )}
 
