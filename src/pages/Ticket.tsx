@@ -50,7 +50,7 @@ export default function Ticket() {
     <div>
       <TicketCard ticketDetails={ticket} />
       <AddComment handleAddComment={handleAddComment} />
-      <Comments commentsList={comments} />
+      <Comments commentsList={[...comments].reverse()} />
     </div>
   )
 }

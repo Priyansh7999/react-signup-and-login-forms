@@ -10,7 +10,7 @@ const AddComment = ({ handleAddComment }:Props) : React.JSX.Element => {
     const initialValues = { body: "" }
 
     return (
-        <div className="border-t border-neutral-200 pt-4 space-y-4">
+        <div className="border-t border-neutral-200 p-4 space-y-4">
             <h1 className="font-semibold">Add Comment</h1>
 
             <Formik

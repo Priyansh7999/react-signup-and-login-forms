@@ -9,7 +9,7 @@ const TicketCard = ({ticketDetails}:Props) => {
     const isAllowed = useIsAllowed();
 
     return (
-        <div className="w-full flex justify-center px-4 py-10 md:p-20">
+        <div className="w-full flex justify-center px-4">
             <div className="w-full border border-neutral-200 p-6 rounded-2xl space-y-2">
                 <h2><span className="font-semibold">Title: </span>{ticketDetails?.title}</h2>
                 <h2><span className="font-semibold">Description: </span>{ticketDetails?.description}</h2>
