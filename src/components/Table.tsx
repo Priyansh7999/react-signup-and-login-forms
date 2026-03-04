@@ -1,16 +1,17 @@
+import type React from "react";
 import type { ReactNode } from "react";
 
-type Column = {
+type Column<T> = {
     header: string;
-    render: (value: any) => ReactNode
+    render: (value: T) => ReactNode
 };
 
-type TableProps = {
-    data: any[]
-    columns: Column[]
+type TableProps<T> = {
+    data: T[]
+    columns: Column<T>[]
 };
 
-const Table = ({ data,columns}: TableProps) => {
+const Table = <T,>({ data,columns}: TableProps<T>) : React.JSX.Element=> {
     return (
         <div className="w-full shadow-xs rounded-2xl border border-neutral-200 bg-white overflow-x-auto">
             <table className="w-full text-sm text-left">
