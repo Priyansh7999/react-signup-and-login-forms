@@ -6,7 +6,7 @@ import type React from "react";
 type Props ={
     handleAddComment: (values:{body:string})=>Promise<void>
 }
-const AddComment = ({ handleAddComment }:Props) : React.JSX.Element => {
+const AddCommentForm = ({ handleAddComment }:Props) : React.JSX.Element => {
     const initialValues = { body: "" }
 
     return (
@@ -39,4 +39,4 @@ const AddComment = ({ handleAddComment }:Props) : React.JSX.Element => {
     )
 }
 
-export default AddComment;
+export default AddCommentForm;

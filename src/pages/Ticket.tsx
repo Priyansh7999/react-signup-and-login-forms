@@ -5,9 +5,9 @@ import type { TicketType } from '../types/ticket';
 import TicketCard from '../components/TicketCard';
 import toast from 'react-hot-toast';
 import axios from 'axios';
-import AddComment from '../components/AddComment';
 import type { CommentType } from '../types/comment';
 import Comments from '../components/Comments';
+import AddCommentForm from '../components/AddCommentForm';
 
 export default function Ticket() : React.JSX.Element {
   const { id } = useParams();
@@ -45,7 +45,7 @@ export default function Ticket() : React.JSX.Element {
   return (
     <div>
       <TicketCard ticketDetails={ticket} />
-      <AddComment handleAddComment={handleAddComment} />
+      <AddCommentForm handleAddComment={handleAddComment} />
       <Comments commentsList={[...comments].reverse()} />
     </div>
   )
